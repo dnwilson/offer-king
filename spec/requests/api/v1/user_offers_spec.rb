@@ -29,7 +29,7 @@ RSpec.describe "/api/v1/offers", type: :request do
   describe "DELETE /:id" do
     let(:offer) { create(:offer, :for_user, user: user) }
     let(:user_offer) { create(:user_offer, offer: offer, user: user) }
-    let(:visit_path) { delete api_v1_user_offer_url(user_offer), as: :json }
+    let(:visit_path) { delete api_v1_user_offer_url(user_offer.offer), as: :json }
 
     context "when user is authenticated" do
       before { login_as(user) }
@@ -37,7 +37,7 @@ RSpec.describe "/api/v1/offers", type: :request do
       it "removes the user offer" do
         visit_path
         json = JSON.parse(response.body)
-        expect(json).to eq({})
+        expect(json["claimed"]).to eq(false)
       end
     end
 

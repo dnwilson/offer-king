@@ -17,5 +17,6 @@ http.interceptors.request.use((config) => {
 
 const get = (path) => { return http.get(path) }
 const post = (path, data) => { return http.post(path, data) }
+const destroy = (path) => { return http.delete(path) }
 
-export { get, post };
+export { get, post, destroy };

@@ -11,7 +11,7 @@
     color: var(--primary);
     cursor: pointer;
   
-    &.offer-claimed {
+    &.offer-claim {
       background: var(--secondary);
     }
   
@@ -63,12 +63,17 @@
     right: 0.5rem;
     top: 0.5rem;
     
+    &.claim {
+      background: var(--secondary);
+    }
+    
     &.claimed {
       background: var(--secondary);
     }
 
-    &.unclaimed {
+    &.default {
       background: var(--card-bg);
+      display: none;
     }
   }
 }

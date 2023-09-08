@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { get, post } from '../Api'
+import { get, post, destroy } from '../Api'
 import { useEffect } from 'react'
 import './Offers.scss'
 import { AppContext } from '../AppContext'
@@ -13,10 +13,21 @@ const OfferStatus = ({ status }) => {
 }
 
 const claimOffer = (id, setOffers) => {
-  post(`offers/${id}/claim`)
+  post(`offers/${id}/offers`)
     .then((response) => {
       const offer = response.data
       setOffers(offers => offers.map((off) => (off.id === offer.id ? offer : off)))
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
+const unclaimOffer = (id, setOffers) => {
+  destroy(`offers/${id}`)
+    .then((response) => {
+      const newOffer = response.data
+      setOffers(offers => offers.map(offer => offer.id === newOffer.id ? newOffer : offer ))
     })
     .catch((error) => {
       console.error(error)
@@ -36,7 +47,11 @@ const Offer = ({ offer }) => {
   }
 
   const claimIt = () => {
-    claimOffer(offer.id, setOffers)
+    if (offer.claimed) {
+      unclaimOffer(offer.id, setOffers)
+    } else {
+      claimOffer(offer.id, setOffers)
+    }
   }
 
   return (
@@ -68,7 +83,6 @@ const OfferList = () => {
     get('offers')
       .then(response => response.data)
       .then(data => {
-        console.log("DATA", data)
         setOffers(data)
       })
       .catch((error) => {
