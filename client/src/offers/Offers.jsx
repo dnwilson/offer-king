@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { get } from '../Api'
 import { useEffect } from 'react'
 import './Offers.scss'
+import { AppContext } from '../AppContext'
 
 const Offer = ({ offer }) => {
   return (
@@ -16,6 +17,7 @@ const Offer = ({ offer }) => {
 
 const OfferList = () => {
   const [offers, setOffers] = useState([])
+  const { clearSession } = useContext(AppContext)
 
   useEffect(() => {
     if (offers.length == 0) {
@@ -29,12 +31,17 @@ const OfferList = () => {
       .then(data => {
         setOffers(data)
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        console.error(error)
+        if (error?.response?.status == 401) {
+          clearSession()
+        }
+      })
   }
 
   return(
     <div className='offers'>
-      { offers
+      { offers?.length > 0
         ? offers.map(offer => <Offer key={offer.id} offer={offer} />)
         : <>No available offers</>
       }

@@ -1,4 +1,3 @@
-import { logout } from '../Api'
 import logo from '../assets/king-icon.png'
 import './Nav.scss'
 
@@ -24,7 +23,7 @@ const Nav = ({ user, logout }) => {
             <li className='nav-item dropdown'>
               <a href='#' className='nav-link'>{user.first_name}</a>
               <ul className='nav-items dropdown-content'>
-                <li className='nav-item'><a href='#' className='nav-link'>Profile</a></li>
+                <li className='nav-item'><a href='/profile' className='nav-link'>Profile</a></li>
                 <li className='nav-item'><a onClick={logout} data-method='delete' className='nav-link'>Log Out</a></li>
               </ul>
             </li>

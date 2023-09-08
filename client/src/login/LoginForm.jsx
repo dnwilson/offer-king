@@ -27,7 +27,6 @@ const LoginForm = () => {
         setSession(data)
       })
       .catch((error) => {
-        console.error("Error", error)
         email.current.value = ''
         password.current.value = ''
         setErrors({...errors, form: "Invalid login"})

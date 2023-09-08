@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_08_070807) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_08_132933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,11 +22,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_070807) do
     t.index ["description"], name: "index_offers_on_description", unique: true
   end
 
+  create_table "targets", force: :cascade do |t|
+    t.bigint "offer_id", null: false
+    t.integer "min_age", null: false
+    t.integer "max_age", null: false
+    t.string "genders", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id", "min_age", "max_age", "genders"], name: "index_targets_on_offer_id_and_min_age_and_max_age_and_genders", unique: true
+    t.index ["offer_id"], name: "index_targets_on_offer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email", null: false
-    t.datetime "birthdate", null: false
+    t.date "birthdate", null: false
     t.string "gender", null: false
     t.string "password_digest"
     t.datetime "created_at", null: false
@@ -34,4 +45,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_070807) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "targets", "offers"
 end

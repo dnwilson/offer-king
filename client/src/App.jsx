@@ -6,15 +6,14 @@ import { Nav } from './shared/Nav'
 import LoginForm from './login/LoginForm'
 import './App.scss'
 import { useSession } from './hooks/useSession'
+import Profile from './profile/Profile'
 
 const App = () => {
   const { token, currentUser, setSession, clearSession } = useSession()
-
-  console.log("Current user", currentUser?.first_name)
-  console.log("Token", token)
+  const [user] = useState(currentUser)
 
   return (
-    <AppContext.Provider value={{currentUser, token, setSession}}>
+    <AppContext.Provider value={{currentUser, token, setSession, clearSession}}>
       { token
         ? (
           <>
@@ -23,6 +22,7 @@ const App = () => {
               <div className="container">
                   <Routes>
                     <Route path='/' element={<OfferList />} />
+                    <Route path='/profile' element={<Profile />} />
                   </Routes>
               </div>
             </div>

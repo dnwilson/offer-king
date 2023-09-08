@@ -1,6 +1,5 @@
 .offer {
-  --border-radius: 0.5rem;
-  background-color: #efefef;
+  background-color: var(--card-bg);
   border-radius: var(--border-radius);
   display: block;
   width: 100%;

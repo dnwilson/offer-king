@@ -8,6 +8,8 @@
   --secondary-dark: #58d569;
   --border-color: #666;
   --border-color-active: var(--secondary-dark);
+  --border-radius: 0.5rem;
+  --card-bg: #efefef;
   --red: #fd2c2c;
   --red-rgb: 253, 44, 44;
   color: var(--primary);
