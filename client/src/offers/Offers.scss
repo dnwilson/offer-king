@@ -3,10 +3,12 @@
   background-color: #efefef;
   border-radius: var(--border-radius);
   display: block;
+  width: 100%;
 
   .offer-img {
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
+    width: 100%;
   }
 
   .offer-body {
