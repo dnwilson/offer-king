@@ -1,24 +1,28 @@
-# README
+# OfferKing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails Application with a React Backend that matches User with Offers based on their age and gender.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- As a User, I should be able to register
+- As a User, I should be able to login
+- As a User, I should be able to logout
+- As a User, I should be able to see a list of available offers
+- As a User, I should be able to claim an offer
 
-* System dependencies
+### Setup
 
-* Configuration
+```
+bundle exec rails db:setup
+bin/rails dev
+```
 
-* Database creation
+### Testing
 
-* Database initialization
+```
+# Rails tests
+rspec spec
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# React tests
+cd client && yarn test
+```
