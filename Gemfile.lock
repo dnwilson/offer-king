@@ -217,9 +217,13 @@ GEM
     shellany (0.0.1)
     stringio (3.0.8)
     thor (1.2.2)
+    timeliness (0.4.5)
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    validates_timeliness (7.0.0.beta2)
+      activemodel (>= 7.0.0, < 8)
+      timeliness (>= 0.3.10, < 1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -242,6 +246,7 @@ DEPENDENCIES
   rails (~> 7.0.7, >= 7.0.7.2)
   rspec-rails
   tzinfo-data
+  validates_timeliness (~> 7.0.0.beta1)
 
 RUBY VERSION
    ruby 3.2.2p53
