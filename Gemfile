@@ -6,6 +6,7 @@ ruby "3.2.2"
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 
 gem "bcrypt", "~> 3.1.7"
+gem "blueprinter"
 gem "bootsnap", require: false
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
