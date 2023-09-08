@@ -5,7 +5,9 @@ User.destroy_all
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
+    birthdate: Faker::Date.between(from: 80.year.ago, to: 13.years.ago),
     email: Faker::Internet.email,
+    gender: User.genders.values.sample,
     password: "passwerk",
     password_confirmation: "passwerk"
   )

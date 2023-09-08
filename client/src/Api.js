@@ -9,6 +9,18 @@ const http = axios.create({
 })
 
 const get = (path) => { return http.get(path) }
+const post = (path, data) => { return http.post(path, data) }
+
+const logout = () => {
+  http
+    .delete('logout')
+    .then(response => {
+      console.log("Response", response)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
 
 const login = (email, password) => {
   http
@@ -22,4 +34,4 @@ const login = (email, password) => {
     })
 }
 
-export { get, login };
+export { get, post, login, logout };

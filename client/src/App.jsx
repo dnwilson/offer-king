@@ -1,33 +1,36 @@
 import { useState } from 'react'
 import { AppContext } from './AppContext'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { OfferList } from './offers/Offers'
 import { Nav } from './shared/Nav'
 import LoginForm from './login/LoginForm'
 import './App.scss'
+import { useSession } from './hooks/useSession'
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState()
+  const { token, currentUser, setSession, clearSession } = useSession()
 
-  if (!currentUser) {
-    return (
-      <main className="auth">
-        <LoginForm />
-      </main>
-    )
-  }
+  console.log("Current user", currentUser?.first_name)
+  console.log("Token", token)
 
   return (
-    <main className='main'>
-      <div className="container">
-        <Nav />
-        <AppContext.Provider value= {{ currentUser, setCurrentUser }}>
-          <Routes>
-            <Route path='/' element={<OfferList />} />
-          </Routes>
-        </AppContext.Provider>
-      </div>
-    </main>
+    <AppContext.Provider value={{currentUser, token, setSession}}>
+      { token
+        ? (
+          <>
+            <Nav user={currentUser} logout={clearSession} />
+            <div className="main">
+              <div className="container">
+                  <Routes>
+                    <Route path='/' element={<OfferList />} />
+                  </Routes>
+              </div>
+            </div>
+          </>
+        )
+        : <LoginForm />
+      }
+    </AppContext.Provider>
   )
 }
 

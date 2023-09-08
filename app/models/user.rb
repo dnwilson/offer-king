@@ -3,6 +3,12 @@ class User < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+  enum gender: {
+    male: "male",
+    female: "female",
+    other: "other"
+  }
+
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
   validates_date :birthdate, presence: true, before: lambda { 13.years.ago.to_date },

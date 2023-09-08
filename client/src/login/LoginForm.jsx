@@ -1,13 +1,13 @@
 import { useContext, useRef, useState } from 'react'
 import { AppContext } from '../AppContext'
 import './LoginForm.scss'
-import { login } from '../Api'
 import { Logo } from '../shared/Nav'
+import { post } from '../Api'
 
 const LoginForm = () => {
   const email = useRef()
   const password = useRef()
-  const { setCurrentUser } = useContext(AppContext)
+  const { setSession, currentUser, token } = useContext(AppContext)
   const [errors, setErrors] = useState({ email: '', password: '' })
   const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
@@ -19,20 +19,27 @@ const LoginForm = () => {
     }
   }
 
+  const submitToServer = () => {
+    const params = { email: email.current.value, password: password.current.value }
+    post('login', params)
+      .then(response => response.data)
+      .then((data) => {
+        setSession(data)
+      })
+      .catch((error) => {
+        console.error("Error", error)
+        email.current.value = ''
+        password.current.value = ''
+        setErrors({...errors, form: "Invalid login"})
+        setInterval(() => { setErrors({...errors, form: null}) }, 1500);
+      })
+  }
+
   const onSubmit = (e) => {
     setErrors({...errors, form: null})
     e.preventDefault()
 
-    const user = login(email.current.value, password.current.value)
-    if (user) {
-      setCurrentUser(user)
-    } else {
-      email.current.value = ''
-      password.current.value = ''
-      setErrors({...errors, form: "Invalid login"})
-      setInterval(() => { setErrors({...errors, form: null}) }, 1500);
-    }
-
+    submitToServer()
   }
 
   return(

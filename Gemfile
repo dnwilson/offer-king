@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 gem "bcrypt", "~> 3.1.7"
 gem "blueprinter"
 gem "bootsnap", require: false
+gem "jwt"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rack-cors"
