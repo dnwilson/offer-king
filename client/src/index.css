@@ -7,6 +7,9 @@
   --secondary: #6afd7e;
   --secondary-dark: #58d569;
   --border-color: #666;
+  --border-color-active: var(--secondary-dark);
+  --red: #fd2c2c;
+  --red-rgb: 253, 44, 44;
   color: var(--primary);
   font-family: Montserrat, sans-serif;
   font-weight: 300;
@@ -45,4 +48,26 @@ h1 {
   font-size: 3.2em;
   font-weight: var(--heading-font-weight);
   line-height: 1.1;
+}
+
+.btn,
+button,
+input[type='submit'] {
+  --btn-bg: var(--secondary);
+  --btn-color: var(--primary);
+  background-color: var(--btn-bg);
+  border: none;
+  border-radius: 0.375rem;
+  color: var(--btn-color);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.25rem;
+  height: 54px;
+  line-height: 1rem;
+  padding: 0.375rem 0.75rem;
+  text-align: center;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  user-select: none;
+  vertical-align: middle;
+  width: 100%;
 }

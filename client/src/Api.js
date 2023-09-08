@@ -10,4 +10,16 @@ const http = axios.create({
 
 const get = (path) => { return http.get(path) }
 
-export { get };
+const login = (email, password) => {
+  http
+    .post('login', { email: email, password: password })
+    .then(response => response.data)
+    .then((data) => {
+      return data
+    })
+    .catch((error) => {
+      console.error("Error is", error)
+    })
+}
+
+export { get, login };

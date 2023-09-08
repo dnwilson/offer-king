@@ -3,11 +3,11 @@ import './Nav.scss'
 
 const Logo = ({ className }) => {
   return (
-    <a href='/' className={`logo ${className}`}>
+    <a href='/' className={`logo ${className ? className : ''}`}>
       <div className='logo-img'>
         <img src={logo} className='img' />
       </div>
-      <span>OfferKing</span>
+      <span className='brand-name'>OfferKing</span>
     </a>
   )
 }
