@@ -1,8 +1,28 @@
 .offer {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
+  color: var(--primary);
   display: block;
+  transition: all 150ms ease-in-out;
   width: 100%;
+  
+  &:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    color: var(--primary);
+    cursor: pointer;
+  
+    &.offer-claimed {
+      background: var(--secondary);
+    }
+  
+    &.offer-remove {
+      background: var(--warning);
+    }
+  
+    &.offer-unclaimed {
+      background: var(--card-bg);
+    }
+  }
 
   .offer-img {
     border-top-left-radius: var(--border-radius);
@@ -27,5 +47,28 @@
 
   .offer:not(:last-child) {
     margin-bottom: 1.5rem;
+  }
+}
+
+.status-wrapper {
+  position: relative;
+
+  .status {
+    background: var(--warning);
+    border-radius: 0.25rem;
+    color: var(--primary);
+    font-weight: 300;
+    padding: 0.25rem 0.375rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    
+    &.claimed {
+      background: var(--secondary);
+    }
+
+    &.unclaimed {
+      background: var(--card-bg);
+    }
   }
 }

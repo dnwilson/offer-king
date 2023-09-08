@@ -1,23 +1,62 @@
 import { useContext, useState } from 'react'
-import { get } from '../Api'
+import { get, post } from '../Api'
 import { useEffect } from 'react'
 import './Offers.scss'
 import { AppContext } from '../AppContext'
 
-const Offer = ({ offer }) => {
-  return (
-    <div className='offer' id={`offer-${offer.id}`}>
-      <img src={offer.image} className='offer-img' />
-      <div className='offer-body'>
-        <h2 className='offer-desc'>{offer.description}</h2>
-      </div>
+const OfferStatus = ({ status }) => {
+  return(
+    <div className="status-wrapper">
+      <div className={`status ${status}`}>{status}</div>
     </div>
   )
 }
 
+const claimOffer = (id, setOffers) => {
+  post(`offers/${id}/claim`)
+    .then((response) => {
+      const offer = response.data
+      setOffers(offers => offers.map((off) => (off.id === offer.id ? offer : off)))
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
+const Offer = ({ offer }) => {
+  const { setOffers } = useContext(AppContext)
+  const [status, setStatus] = useState(offer.claimed ? "claimed" : "default");
+
+  const handleMouseOver = () => {
+    setStatus(offer.claimed ? "remove" : "claim")
+  }
+
+  const handleMouseOut = () => {
+    setStatus(offer.claimed ? "claimed" : "default")
+  }
+
+  const claimIt = () => {
+    claimOffer(offer.id, setOffers)
+  }
+
+  return (
+    <a
+      onMouseEnter={handleMouseOver}
+      onMouseLeave={handleMouseOut} 
+      onClick={claimIt} className={`offer offer-${status}`} id={`offer-${offer.id}`}>
+      <>
+        <OfferStatus claimed={offer.claimed} status={status} />
+        <img src={offer.image} className='offer-img' />
+        <div className='offer-body'>
+          <h2 className='offer-desc'>{offer.description}</h2>
+        </div>
+      </>
+    </a>
+  )
+}
+
 const OfferList = () => {
-  const [offers, setOffers] = useState([])
-  const { clearSession } = useContext(AppContext)
+  const { clearSession, offers, setOffers } = useContext(AppContext)
 
   useEffect(() => {
     if (offers.length == 0) {
@@ -29,6 +68,7 @@ const OfferList = () => {
     get('offers')
       .then(response => response.data)
       .then(data => {
+        console.log("DATA", data)
         setOffers(data)
       })
       .catch((error) => {

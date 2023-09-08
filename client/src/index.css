@@ -5,6 +5,7 @@
   --heading-font-weight: 400;
   --primary: #000;
   --secondary: #6afd7e;
+  --warning: #fbe348;
   --secondary-dark: #58d569;
   --border-color: #666;
   --border-color-active: var(--secondary-dark);

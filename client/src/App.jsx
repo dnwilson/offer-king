@@ -10,10 +10,10 @@ import Profile from './profile/Profile'
 
 const App = () => {
   const { token, currentUser, setSession, clearSession } = useSession()
-  const [user] = useState(currentUser)
+  const [offers, setOffers] = useState([])
 
   return (
-    <AppContext.Provider value={{currentUser, token, setSession, clearSession}}>
+    <AppContext.Provider value={{currentUser, setSession, clearSession, setOffers, offers}}>
       { token
         ? (
           <>

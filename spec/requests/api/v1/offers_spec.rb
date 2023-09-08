@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "/api/v1/offers", type: :request do
   let(:user) { create(:user) }
-  let(:visit_path) { get api_v1_offers_url, as: :json }
 
   describe "GET /index" do
+    let(:visit_path) { get api_v1_offers_url, as: :json }
+
     before { create_list(:offer, 15, :for_user, user: user) }
 
     context "when user is authenticated" do
