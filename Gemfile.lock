@@ -73,12 +73,15 @@ GEM
     builder (3.2.4)
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.4)
+      rails
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -193,6 +196,10 @@ GEM
       ffi (~> 1.0)
     rdoc (6.5.0)
       psych (>= 4.0.0)
+    redis (5.0.7)
+      redis-client (>= 0.9.0)
+    redis-client (0.17.0)
+      connection_pool
     reline (0.3.8)
       io-console (~> 0.5)
     rspec (3.12.0)
@@ -216,6 +223,11 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
+    sentry-rails (5.11.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.11.0)
+    sentry-ruby (5.11.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     shellany (0.0.1)
     stringio (3.0.8)
     thor (1.2.2)
@@ -240,6 +252,7 @@ DEPENDENCIES
   blueprinter
   bootsnap
   debug
+  dockerfile-rails (>= 1.5)
   factory_bot_rails
   faker
   guard-rspec
@@ -248,7 +261,10 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.7, >= 7.0.7.2)
+  redis (~> 5.0)
   rspec-rails
+  sentry-rails (~> 5.11)
+  sentry-ruby (~> 5.11)
   tzinfo-data
   validates_timeliness (~> 7.0.0.beta1)
 

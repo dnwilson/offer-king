@@ -26,3 +26,19 @@ rspec spec
 # React tests
 cd client && yarn test
 ```
+
+### App
+
+[Demo](https://orca-app-itdnc.ondigitalocean.app)
+
+### Demo Users
+
+```
+Email              | Password
+------------------ | ------------
+bob@example.com    | passwerk
+valrie@example.com | passwerk
+laurel@example.com | passwerk
+daniel@example.com | passwerk
+lloyd@example.com  | passwerk
+```
