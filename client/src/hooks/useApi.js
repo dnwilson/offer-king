@@ -2,8 +2,16 @@ import { useContext, useState } from "react"
 import axios from 'axios';
 import { AppContext } from "../AppContext"
 
+const baseURL = () => {
+  if (import.meta.env.DEV) {
+    return 'http://localhost:3000/api/v1'
+  } else {
+    return 'https://offer-king.fly.dev/api/v1'
+  }
+}
+
 const http = axios.create({
-  baseURL: 'http://localhost:3000/api/v1',
+  baseURL: baseURL(),
   headers: {
     'Content-type': 'application/json',
     'X-TimeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
