@@ -4,7 +4,7 @@ A Rails Application with a React Backend that matches User with Offers based on 
 
 ## Features
 
-- [ ] As a User, I should be able to register
+- [x] As a User, I should be able to register
 - [x] As a User, I should be able to login
 - [x] As a User, I should be able to logout
 - [x] As a User, I should be able to see a list of available offers
