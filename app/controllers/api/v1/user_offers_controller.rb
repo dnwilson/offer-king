@@ -8,7 +8,7 @@ module Api
 
         if user_offer.save
           serializer = OfferSerializer.render(
-            @offer.reload, view: :user_offer, user_offer: user_offer
+            @offer, view: :user_offer, user_offer: user_offer
           )
           render json: serializer, status: :created
         else

@@ -15,6 +15,15 @@ module CheckAuthentication
     @current_user ||= determine_current_user
   end
 
+  def render_auth_hash(user)
+    token = JsonWebToken.encode(user_id: user.id)
+    time = Time.current + 24.hours.to_i
+    render json: {
+      user: UserSerializer.render(user),
+      token: token, exp: time.strftime("%m-%d-%Y %H:%M")
+    }
+  end
+
   private
 
   def determine_current_user
@@ -24,7 +33,7 @@ module CheckAuthentication
   end
 
   def auth_controller
-    controller_name == "sessions"
+    controller_name.in?(%w(sessions registrations))
   end
 
   def auth_params

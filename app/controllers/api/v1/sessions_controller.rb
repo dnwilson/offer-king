@@ -5,12 +5,7 @@ module Api
         @user = User.find_by_email(params[:email])
 
         if @user&.authenticate(params[:password])
-          token = JsonWebToken.encode(user_id: @user.id)
-          time = Time.current + 24.hours.to_i
-          render json: {
-            user: UserSerializer.render(@user),
-            token: token, exp: time.strftime("%m-%d-%Y %H:%M")
-          }
+          render_auth_hash(@user)
         else
           render json: {message: "Invalid Email/Password"}, status: :unauthorized
         end
